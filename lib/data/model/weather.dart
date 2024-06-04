@@ -5,14 +5,14 @@ part 'weather.g.dart';
 @JsonSerializable()
 class Weather {
   Coord? coord;
-  List<Weather>? weather;
+  List<WeatherData>? weather;
   String? base;
   Main? main;
   int? visibility;
   Wind? wind;
   Clouds? clouds;
   int? dt;
-  SunPosition? sys;
+  Sys? sys;
   int? timezone;
   int? id;
   String? name;
@@ -22,7 +22,6 @@ class Weather {
       {this.coord,
       this.weather,
       this.base,
-      this.main,
       this.visibility,
       this.wind,
       this.clouds,
@@ -47,18 +46,6 @@ class Coord {
 }
 
 @JsonSerializable()
-class WeatherData {
-  int? id;
-  String? main;
-  String? description;
-  String? icon;
-
-  WeatherData({this.id, this.main, this.description, this.icon});
-  factory WeatherData.fromJson(Map<String, dynamic> json) =>
-      _$WeatherDataFromJson(json);
-}
-
-@JsonSerializable()
 class Main {
   double? temp;
   double? feelsLike;
@@ -78,8 +65,18 @@ class Main {
       this.humidity,
       this.seaLevel,
       this.grndLevel});
-
   factory Main.fromJson(Map<String, dynamic> json) => _$MainFromJson(json);
+}
+
+@JsonSerializable()
+class WeatherData {
+  int? id;
+  String? description;
+  String? icon;
+
+  WeatherData({this.id, this.description, this.icon});
+  factory WeatherData.fromJson(Map<String, dynamic> json) =>
+      _$WeatherDataFromJson(json);
 }
 
 @JsonSerializable()
@@ -103,13 +100,12 @@ class Clouds {
 }
 
 @JsonSerializable()
-class SunPosition {
+class Sys {
   String? country;
   int? sunrise;
   int? sunset;
 
-  SunPosition({this.country, this.sunrise, this.sunset});
+  Sys({this.country, this.sunrise, this.sunset});
 
-  factory SunPosition.fromJson(Map<String, dynamic> json) =>
-      _$SunPositionFromJson(json);
+  factory Sys.fromJson(Map<String, dynamic> json) => _$SysFromJson(json);
 }
