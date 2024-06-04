@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:weatherapp/screen/weather_info_page.dart';
+import 'package:weatherapp/service_locator/service_locator.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
+  setupLocator();
   runApp(const MyApp());
 }
 
@@ -16,29 +21,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const WeatherInfoPage(),
-    );
-  }
-}
-
-class WeatherInfoPage extends StatefulWidget {
-  const WeatherInfoPage({
-    super.key,
-  });
-
-  @override
-  State<WeatherInfoPage> createState() => _WeatherInfoPageState();
-}
-
-class _WeatherInfoPageState extends State<WeatherInfoPage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
-        ),
-      ),
     );
   }
 }
