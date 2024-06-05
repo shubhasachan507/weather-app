@@ -35,36 +35,39 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
           final name = store.weatherResponse.value?.value?.name;
           final temp = store.weatherResponse.value?.value?.main?.temp?.toInt();
           return Container(
+            height: MediaQuery.of(context).size.height,
             decoration: const BoxDecoration(
               gradient: AppColors.background,
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
-            child: Column(children: [
-              const SizedBox(
-                height: 20,
-              ),
-              SearchBar(
-                hintText: AppStrings.searchForCity,
-                controller: _searchController,
-                padding: const WidgetStatePropertyAll<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 16.0)),
-                onSubmitted: (value) {
-                  store.getWeatherData(_searchController.text);
-                  _searchController.clear();
-                },
-                leading: const Icon(Icons.search),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              (error == null)
-                  ? WeatherInformation(
-                      name: name,
-                      icon: icon,
-                      description: description,
-                      temp: temp)
-                  : ErrorView(text: error),
-            ]),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                SearchBar(
+                  hintText: AppStrings.searchForCity,
+                  controller: _searchController,
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(
+                      EdgeInsets.symmetric(horizontal: 16.0)),
+                  onSubmitted: (value) {
+                    store.getWeatherData(_searchController.text);
+                    _searchController.clear();
+                  },
+                  leading: const Icon(Icons.search),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                (error == null)
+                    ? WeatherInformation(
+                        name: name,
+                        icon: icon,
+                        description: description,
+                        temp: temp)
+                    : ErrorView(text: error),
+              ]),
+            ),
           );
         }),
       ),

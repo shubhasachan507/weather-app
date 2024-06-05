@@ -17,16 +17,22 @@ class WeatherInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
         if (name != null)
-          Text(name ?? '',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.white,
-                  )),
+          Text(
+            name!,
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: Colors.white,
+                ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         if (icon != null)
           Container(
-            height: MediaQuery.of(context).size.height * .3,
+            height: screenSize.height * .3,
+            width: screenSize.width * .4,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -38,11 +44,15 @@ class WeatherInformation extends StatelessWidget {
           height: 20,
         ),
         if (description != null)
-          Text(description!.toUpperCase(),
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge
-                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+          Text(
+            description!.toUpperCase(),
+            style: Theme.of(context)
+                .textTheme
+                .headlineLarge
+                ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         const SizedBox(
           height: 20,
         ),
@@ -51,7 +61,7 @@ class WeatherInformation extends StatelessWidget {
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 110)),
+                  fontSize: screenSize.width * .3)),
       ],
     );
   }
